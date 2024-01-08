@@ -13,6 +13,7 @@ struct Node* createNode(int data) {
     newNode->left = NULL;
     newNode->right = NULL;
     return newNode;
+    printf("B");
 }
 
 void insert(Node *root, Node *temp){
@@ -36,15 +37,14 @@ void insert(Node *root, Node *temp){
 }
 
 struct Node* search(struct Node* root, int key) {
-    // Base Cases: root is null or key is present at root
-    if (root == NULL || root->data == key)
+    if (root == NULL || root->data == key){
         return root;
+    }
 
-    // Key is greater than root's key
-    if (root->data < key)
+    if (root->data < key){
         return search(root->right, key);
+    }
 
-    // Key is smaller than root's key
     return search(root->left, key);
 }
 
@@ -73,32 +73,42 @@ void postorder(struct Node* root) {
 }
 
 int main() {
-    // Create the root node
+    int key;
     struct Node* root = createNode(2);
     struct Node* temp = createNode(1);
-    // Create the left and right child nodes
     insert(root, temp);
     temp = createNode(3);
     insert(root, temp);
     insert(root, createNode(5));
 
+    do{
+		printf("Enter key to search and -1 to exit: ");
+		scanf("%d",&key);
+		if(key==-1){
+			break;
+		}
+		temp = search(root,key);
+		if(temp != NULL){
+			printf("Key Found\n");
+		}
+		if(temp == NULL){
+			printf("Inserting Key\n");
+			insert(root, createNode(key));
+		}
+	}while(key!=-1);
 
-    // Print the data of the root node and its children
     printf("Root: %d\n", root->data);
     printf("Left Child: %d\n", root->left->data);
     printf("Right Child: %d\n", root->right->data);
 
-    // Perform inorder traversal
     printf("Inorder Traversal: ");
     inorder(root);
     printf("\n");
 
-    // Perform preorder traversal
     printf("Preorder Traversal: ");
     preorder(root);
     printf("\n");
 
-    // Perform postorder traversal
     printf("Postorder Traversal: ");
     postorder(root);
     printf("\n");
