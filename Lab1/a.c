@@ -13,7 +13,6 @@ struct Node* createNode(int data) {
     newNode->left = NULL;
     newNode->right = NULL;
     return newNode;
-    printf("B");
 }
 
 void insert(Node *root, Node *temp){
