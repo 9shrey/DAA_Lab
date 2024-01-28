@@ -1,42 +1,29 @@
-#include<stdio.h>
-//#include<conio.h>
-#include<stdlib.h>
-#include<string.h>
+#include <stdio.h>
+#include <string.h>
 
 int opcount = 0;
 
-void main()
-{
-	int i,j,k,n,m,flag=0;
-	char t[100],p[30];
-	printf("Enter text: ");
-	fgets(t,100,stdin);
-	printf("\nEnter pattern: ");
-	fgets(p,30,stdin);
-	n=strlen(t);
-	m=strlen(p);
-	for(i=0;i<=n-m;i++)
-	{
-		opcount++;
-		j=0;
-		while(j<m && p[j]==t[j+i])
-		{
-			j++;
+void main() {
+	char s1[100], s2[100];
+	int i, j, ind, flag = 0;
+	printf("Enter string 1: ");
+	fgets(s1, sizeof(s1), stdin);
+	printf("Enter string 2: ");
+	fgets(s2, sizeof(s2), stdin);
+	s1[strcspn(s1, "\n")] = '\0'; 
+	s2[strcspn(s2, "\n")] = '\0';
+	for (i = 0; i < strlen(s1) - strlen(s2) + 1; i++) {
+		for (ind = 0; ind < strlen(s2); ind++) {
 			opcount++;
-			if(j==m)
-			{
-				
-				flag=1;
-				k=i+1;
-			}
-			else flag=0;
+			if (s2[ind] != s1[i + ind])
+				break;
 		}
+		if (ind == strlen(s2))
+			break;
 	}
-	printf("\nOpcount: %d\n",opcount);
-
-	if(flag==1)
-	printf("\nPattern found at position: %d\n ",k);
+	printf("Operation count = %d\n", opcount);
+	if (ind == strlen(s2))
+		printf("Substring is at index %d. Count : %d", i, i + ind);
 	else
-	printf("\nPattern not found in text \n");
-	// getc();
+		printf("String 1 does not have substring 2. Count : %d", i);
 }

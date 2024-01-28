@@ -11,7 +11,7 @@ int ConsecIntegerGCD(int m, int n) {
 	
 	while(t!=0) {
 		opcount++;
-		if((m % t ==0) &&(n%t==0)){
+		if((m%t==0) &&(n%t==0)){
 			printf("Operation count= %d\n", opcount); 
 			return t;
 		}
